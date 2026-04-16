@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow Dark</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #0a0a12;
+            color: #e0e0ff;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            transition: opacity 0.3s ease;
+        }
+        
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #00f3ff;
+        }
+        
+        .app {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .app.loaded {
+            display: block;
+            opacity: 1;
+        }
+        
+        .error-banner {
+            background-color: #ff00aa;
+            color: #0a0a12;
+            padding: 1rem;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .error-banner.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <div class="loading-spinner">
+            <span>TASKFLOW</span>
+            <div class="spinner"></div>
+        </div>
+    </div>
+    
+    <div class="error-banner" id="errorBanner"></div>
+    
+    <div class="app" id="app">
+        <!-- Auth Gate -->
+        <div class="auth-gate" id="authGate">
+            <div class="auth-container">
+                <h1 class="auth-title">TASKFLOW DARK</h1>
+                <p class="auth-subtitle">A cyberpunk-inspired task manager</p>
+                
+                <div class="auth-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="hacker@cyber.dash" autocomplete="email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+                    </div>
+                    
+                    <div class="auth-errors" id="authErrors"></div>
+                    
+                    <div class="auth-buttons">
+                        <button class="btn btn-primary" id="signUpBtn">SIGN UP</button>
+                        <button class="btn btn-secondary" id="signInBtn">SIGN IN</button>
+                    </div>
+                    
+                    <p class="auth-note">Use any email and password to test the app</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- App UI -->
+        <div class="app-ui" id="appUi">
+            <header class="header">
+                <div class="header-content">
+                    <h1 class="app-title">TASKFLOW DARK</h1>
+                    <button class="btn-signout" id="signOutBtn">SIGN OUT</button>
+                </div>
+            </header>
+            
+            <main class="main-container">
+                <div class="task-input-section">
+                    <div class="input-group">
+                        <input type="text" id="taskInput" placeholder="Enter a new task..." class="task-input">
+                        <button class="btn-add" id="addTaskBtn">ADD</button>
+                    </div>
+                    <div class="input-error" id="inputError"></div>
+                </div>
+                
+                <div class="filter-section">
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">ALL</button>
+                        <button class="filter-btn" data-filter="active">ACTIVE</button>
+                        <button class="filter-btn" data-filter="done">DONE</button>
+                    </div>
+                    <div class="task-count" id="taskCount">0 tasks</div>
+                </div>
+                
+                <div class="tasks-container">
+                    <div class="tasks-list" id="tasksList">
+                        <!-- Tasks will be inserted here -->
+                    </div>
+                    
+                    <div class="empty-state" id="emptyState">
+                        <div class="empty-icon">📋</div>
+                        <h3>No tasks yet</h3>
+                        <p>Add your first task to get started</p>
+                    </div>
+                    
+                    <div class="loading-state" id="loadingState">
+                        <div class="loading-spinner-small"></div>
+                        <p>Loading tasks...</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <script type="module" src="app.js"></script>
+</body>
+</html>
